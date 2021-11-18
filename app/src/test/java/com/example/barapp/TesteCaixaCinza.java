@@ -1,13 +1,13 @@
 package com.example.barapp;
 
+import com.example.barapp.util.DriverFactory;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -17,16 +17,8 @@ public class TesteCaixaCinza {
     private AndroidDriver<MobileElement> driver;
 
     @Before
-    public void setUp() throws MalformedURLException {
-        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability("platformName", "Android");
-        desiredCapabilities.setCapability("deviceName", "K7AXB60350088V6");
-        desiredCapabilities.setCapability("automationName", "uiautomator2");
-        desiredCapabilities.setCapability("appPackage", "com.example.barapp");
-        desiredCapabilities.setCapability("appActivity", "com.example.barapp.MainActivity");
-
-        URL remoteUrl = new URL("http://localhost:4723/wd/hub");
-        driver = new AndroidDriver(remoteUrl, desiredCapabilities);
+    public void setUp()  {
+        driver = DriverFactory.getDriver();
 
     }
 
@@ -71,6 +63,6 @@ public class TesteCaixaCinza {
     @After
     public void tearDown() {
 
-        driver.quit();
+        DriverFactory.finalizarDriver();
     }
 }
